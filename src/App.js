@@ -1,6 +1,20 @@
 import logo from "./logo.png";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 // import `css`and `ThemeProvider` from "@emotion/react" package
+import { ThemeProvider } from "@emotion/react";
 // import styled components, theming and animation from "./styles.js" file
+import {
+  CardWrapper,
+  ImageWrapper,
+  TextWrapper,
+  TitleWrapper,
+  DescriptionWrapper,
+  ActionsWrapper,
+  Button,
+  PrimaryButton,
+  SecondaryButton,
+} from "./styles";
 
 const hotels = [
   {
@@ -29,22 +43,50 @@ const hotels = [
 // Apply styling to code within the `App` component's `return` statement using styled components, theming, animation and the `css` prop
 function App() {
   return (
-    <main>
-      <img src={logo} alt="" />
-      <div>
+    <main
+      css={{
+        color: "#03045e",
+        background: "#caf0f8",
+        height: "1200px",
+        fontFamily: "helvetica",
+      }}
+    >
+      <img
+        src={logo}
+        alt="logo"
+        css={css`
+          display: absolute;
+          margin-top: 15px;
+          margin-left: 15px;
+          height: 100px;
+          width: 100px;
+        `}
+      />
+      <div
+        css={css`
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 15px;
+          padding: 20px;
+          @media (max-width: 900px) {
+            display: grid;
+          }
+        `}
+      >
         {hotels.map((hotel) => {
           return (
-            <div key={hotel.id}>
-              <img src={hotel.src} alt={hotel.alt} />
-              <div>
-                <h2>{hotel.title}</h2>
-                <h3>{hotel.description}</h3>
-              </div>
-              <div>
-                <button>Details</button>
-                <button>Book</button>
-              </div>
-            </div>
+            <CardWrapper key={hotel.id}>
+              <ImageWrapper src={hotel.src} alt={hotel.alt} />
+              <TextWrapper>
+                <TitleWrapper>{hotel.title}</TitleWrapper>
+                <DescriptionWrapper>{hotel.description}</DescriptionWrapper>
+              </TextWrapper>
+              <ActionsWrapper>
+                <PrimaryButton>Details</PrimaryButton>
+                <SecondaryButton>Book</SecondaryButton>
+              </ActionsWrapper>
+            </CardWrapper>
           );
         })}
       </div>
